@@ -76,5 +76,6 @@ function startGame(): void{
   app.gamestarted = true;
 }
 
+
 document.addEventListener('click', startGame);
 
