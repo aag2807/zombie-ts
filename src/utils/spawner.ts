@@ -1,5 +1,7 @@
+//PACKAGES
 import * as PIXI from 'pixi.js';
 
+//ENTITY
 import Zombie from "../entity/Zombie";
 
 export default class Spawner {

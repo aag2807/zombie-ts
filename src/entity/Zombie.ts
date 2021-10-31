@@ -70,7 +70,7 @@ export default class Zombie {
     this.attackInterval = setInterval(() => this.player.attack(),500)
   }
 
-  public get position(): PIXI.ObservablePoint<any> {
+  public get position(): PIXI.ObservablePoint {
     return this.zombie.position;
   }
 
@@ -92,7 +92,7 @@ export default class Zombie {
     let v = dir.normalize().multiplyScalar(this.enemySpeed);
     this.zombie.position.set(
       this.zombie.position.x + v.x * delta,
-      this.zombie.position.y + v.y * delta
+    this.zombie.position.y + v.y * delta
     );
   }
 }

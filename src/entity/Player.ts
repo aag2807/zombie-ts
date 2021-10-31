@@ -1,4 +1,7 @@
+//PACKAGES
 import * as PIXI from 'pixi.js'
+
+//ENTITY
 import Shooting from './Shooting';
 
 export default class Player {
@@ -10,7 +13,7 @@ export default class Player {
   private INITIAL_WIDTH: number;
 
   //PUBLIC  
-  public player: PIXI.Sprite;
+  public player: PIXI.AnimatedSprite;
   public playerWidth: number = 32
   public shooting: Shooting;
   public healthbar: PIXI.Graphics | any;
@@ -22,11 +25,27 @@ export default class Player {
    */
   constructor(private app: PIXI.Application,) {
     this.INITIAL_WIDTH = this.app.screen.width - 2 * this.MARGIN;
-    this.player = new PIXI.Sprite(PIXI.Texture.WHITE);
+
+
+    
+    let sheet = PIXI.Loader.shared.resources["hero"].spritesheet!
+    this.player = new PIXI.AnimatedSprite(sheet?.animations["idle"])
+    this.player.animationSpeed = 0.1;
+    this.player.play();
+
+
+
+    //#region old sprite
+      // this.player = new PIXI.Sprite(PIXI.Texture.WHITE);
+    //#endregion
+    
     this.player.anchor.set(0.5);
     this.player.position.set(this.app.screen.width / 2, this.app.screen.height / 2);
-    this.player.width = this.player.height = this.playerWidth;
-    this.player.tint = 0xea985d; //RED;
+   
+    //#region old sprite
+      // this.player.width = this.player.height = this.playerWidth;
+      // this.player.tint = 0xea985d; //RED;
+    //#endregion
 
     app.stage.addChild(this.player);
 
@@ -34,7 +53,7 @@ export default class Player {
     this.bootstrap_healthbar();
   }
 
-  public get position(): PIXI.ObservablePoint<any> {
+  public get position(): PIXI.ObservablePoint {
     return this.player.position;
   }
 
